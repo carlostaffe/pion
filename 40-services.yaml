@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: carlos
+  name: udpsrv
+  labels:
+    statefulset.kubernetes.io/pod-name: udpsrv-0
+    #app.kubernetes.io/name: udpsrv
+    #app.kubernetes.io/instance: udpsrv-carlos
+spec:
+  selector:
+    statefulset.kubernetes.io/pod-name: udpsrv-0
+    app: udpsrv
+    #app.kubernetes.io/name: udpsrv
+    #app.kubernetes.io/instance: udpsrv-carlos
+  ports:
+    - name: pion
+      port: 10837
+      protocol: UDP
+      targetPort: pion
+      appProtocol: udp
+    - name: hcheck
+      port: 10000
+      protocol: TCP
+      targetPort: hcheck
+      appProtocol: http
+  clusterIP: None
+---

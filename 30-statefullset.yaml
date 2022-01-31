@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: udpsrv
+  namespace: carlos
+  labels:
+    app: udpsrv
+    app.kubernetes.io/name: udpsrv
+    app.kubernetes.io/instance: udpsrv-carlos
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: udpsrv
+      app.kubernetes.io/instance: udpsrv-carlos
+  replicas: 1
+  seviceName: udpsrv
+  template:
+    metadata:
+      labels:
+        app: udpsrv
+        app.kubernetes.io/name: udpsrv
+        app.kubernetes.io/instance: udpsrv-carlos
+      annotations:
+#        ad.datadoghq.com/istio-proxy.logs: '[{"source": "udprecv", "service": "udprecv"}]'
+#        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+        - name: udpsrv
+          env:
+            - name: HEALTHCHECK_PORT
+              value: "10000"
+            - name: PORT
+              value: "10837"
+          #image: quay.io/greg_caffeine/udprecv:0.1
+          image: quay.io/carlos_taffernaberry/server:1
+          ports:
+            - name: pion
+              containerPort: 10837
+              protocol: UDP
+            - name: hcheck
+              containerPort: 10000
+              protocol: TCP
+      nodeSelector:
+#        machine.openshift.io/cluster-api-machine-role: piggy
+        node.kubernetes.io/instance-type: t3.medium
+#      tolerations:
+#        - key: node-role.kubernetes.io/piggy
+#          operator: Exists
+#          effect: NoSchedule

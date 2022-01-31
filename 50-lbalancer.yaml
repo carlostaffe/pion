@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: carlos
+  name: udpsrv-ext
+  labels:
+    statefulset.kubernetes.io/pod-name: udpsrv-0
+    #app.kubernetes.io/name: udpsrv
+    #app.kubernetes.io/instance: carlos
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+#    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: '2'
+#    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: '10'
+#    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "10000"
+#    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "TCP"
+#    service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: '4'
+#    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: '2'
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  #healthCheckNodePort: 10000
+
+  selector:
+    statefulset.kubernetes.io/pod-name: udpsrv-0
+  ports:
+    - name: pion
+      port: 10837
+      protocol: UDP
+      targetPort: pion
+      appProtocol: udp
+      #The Service "udpsrv-ext" is invalid: spec.ports: Invalid value: []core.ServicePort{core.ServicePort{Name:"pion", Protocol:"UDP", AppProtocol:(*string)(0xc06b9754f0), Port:10837, TargetPort:intstr.IntOrString{Type:1, IntVal:0, StrVal:"pion"}, NodePort:0}, core.ServicePort{Name:"hcheck", Protocol:"TCP", AppProtocol:(*string)(0xc06b975500), Port:10000, TargetPort:intstr.IntOrString{Type:1, IntVal:0, StrVal:"hcheck"}, NodePort:0}}: may not contain more than 1 protocol when type is 'LoadBalancer'
+
+#    - name: hcheck
+#      port: 10000
+#      protocol: TCP
+#      targetPort: hcheck
+#      appProtocol: http
