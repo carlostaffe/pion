@@ -33,8 +33,7 @@ spec:
             - name: PORT
               value: "10837"
           #image: quay.io/greg_caffeine/udprecv:0.1
-          #image: quay.io/carlos_taffernaberry/server:1
-          image: quay.io/greg_caffeine/udprecv:0.3
+          image: quay.io/carlos_taffernaberry/server:1
           ports:
             - name: pion
               containerPort: 10837
