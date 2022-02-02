@@ -22,6 +22,7 @@ spec:
       protocol: UDP
       targetPort: pion
       appProtocol: udp
+      nodePort: 30600
 #    - name: hcheck
 #      port: 10000
 #      protocol: TCP
