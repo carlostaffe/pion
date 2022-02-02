@@ -1,0 +1,63 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  labels:
+    machine.openshift.io/cluster-api-cluster: dev-gmlgq
+  name: dev-caffeine-car-us-west-2a
+  namespace: openshift-machine-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: dev-gmlgq
+      machine.openshift.io/cluster-api-machineset: dev-caffeine-car-us-west-2a
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: dev-gmlgq
+        machine.openshift.io/cluster-api-machine-role: car
+        machine.openshift.io/cluster-api-machine-type: car
+        machine.openshift.io/cluster-api-machineset: dev-caffeine-car-us-west-2a
+    spec:
+      metadata: {}
+      providerSpec:
+        value:
+          ami:
+            id: ami-01105d480bb47353f
+          apiVersion: awsproviderconfig.openshift.io/v1beta1
+          publicIp: true
+          blockDevices:
+          - ebs:
+              encrypted: true
+              iops: 4000
+              kmsKey:
+                arn: ""
+              volumeSize: 200
+              volumeType: io1
+          credentialsSecret:
+            name: aws-cloud-credentials
+          deviceIndex: 0
+          iamInstanceProfile:
+            id: dev-gmlgq-worker-profile
+          instanceType: t3.medium
+          kind: AWSMachineProviderConfig
+          metadata:
+            creationTimestamp: null
+          placement:
+            availabilityZone: us-west-2a
+            region: us-west-2
+          securityGroups:
+          - filters:
+            - name: tag:Name
+              values:
+              - dev-gmlgq-worker-sg
+          subnet:
+            filters:
+            - name: tag:Name
+              values:
+              - dev-gmlgq-public-us-west-2a
+          tags:
+          - name: kubernetes.io/cluster/dev-gmlgq
+            value: owned
+          userDataSecret:
+            name: worker-user-data
