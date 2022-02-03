@@ -36,8 +36,35 @@ spec:
           #image: quay.io/carlos_taffernaberry/server:1
           image: quay.io/greg_caffeine/udprecv:0.3
           ports:
-            - name: pion
+            - name: pion1
               containerPort: 10837
+              protocol: UDP
+            - name: pion2
+              containerPort: 10838
+              protocol: UDP
+            - name: pion3
+              containerPort: 10839
+              protocol: UDP
+            - name: pion4
+              containerPort: 10840
+              protocol: UDP
+            - name: pion5
+              containerPort: 10841
+              protocol: UDP
+            - name: pion6
+              containerPort: 10842
+              protocol: UDP
+            - name: pion7
+              containerPort: 10843
+              protocol: UDP
+            - name: pion8
+              containerPort: 10844
+              protocol: UDP
+            - name: pion9
+              containerPort: 10845
+              protocol: UDP
+            - name: pion10
+              containerPort: 10846
               protocol: UDP
             - name: hcheck
               containerPort: 10000
