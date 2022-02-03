@@ -30,8 +30,8 @@ spec:
           env:
             - name: HEALTHCHECK_PORT
               value: "10000"
-            - name: PORT
-              value: "10837"
+            - name: PORTS
+              value: "10837-10846"
           #image: quay.io/greg_caffeine/udprecv:0.1
           #image: quay.io/carlos_taffernaberry/server:1
           image: quay.io/greg_caffeine/udprecv:0.3
