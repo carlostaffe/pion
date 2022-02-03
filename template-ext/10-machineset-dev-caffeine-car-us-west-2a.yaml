@@ -19,7 +19,9 @@ spec:
         machine.openshift.io/cluster-api-machine-type: car
         machine.openshift.io/cluster-api-machineset: dev-caffeine-car-us-west-2a
     spec:
-      metadata: {}
+      metadata:
+        labels:
+          machine.openshift.io/cluster-api-machine-role: car
       providerSpec:
         value:
           ami:

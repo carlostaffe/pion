@@ -43,8 +43,8 @@ spec:
               containerPort: 10000
               protocol: TCP
       nodeSelector:
-#        machine.openshift.io/cluster-api-machine-role: car
-        node.kubernetes.io/instance-type: t3.medium
+        machine.openshift.io/cluster-api-machine-role: car 
+        #node.kubernetes.io/instance-type: t3.medium
 #      tolerations:
 #        - key: node-role.kubernetes.io/piggy
 #          operator: Exists
