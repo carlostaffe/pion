@@ -53,6 +53,7 @@ spec:
             - name: tag:Name
               values:
               - dev-gmlgq-worker-sg
+              - pion-project-tag
           subnet:
             filters:
             - name: tag:Name

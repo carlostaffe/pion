@@ -1,0 +1,23 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: SecurityGroup
+metadata:
+  namespace: carlos
+  name: caffeinetv-pionproject-dev-us-west-2-sg
+spec:
+  forProvider:
+    region: us-west-2
+    description: pionproject-internet-access
+    tags:
+      - key: Name
+        value: pion-project-tag
+    groupName: pionproject-group-name
+    vpcId: vpc-00ff720b4358b24be
+    ingress:
+      - ipProtocol: udp 
+        fromPort: 30600
+        toPort: 30610
+        ipRanges:
+          - cidrIp: 0.0.0.0/0
+            description: internet access
+  providerConfigRef:
+    name: provider-aws
