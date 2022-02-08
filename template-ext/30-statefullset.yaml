@@ -25,6 +25,8 @@ spec:
 #        ad.datadoghq.com/istio-proxy.logs: '[{"source": "udprecv", "service": "udprecv"}]'
 #        sidecar.istio.io/inject: "true"
     spec:
+      serviceAccountName: privileged
+      hostNetwork: true
       containers:
         - name: udpsrv
           env:

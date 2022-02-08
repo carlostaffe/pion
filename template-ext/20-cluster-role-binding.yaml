@@ -1,0 +1,16 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'pig-serviceaccount-rolebinding'
+# These subjects are what get the named Role in roleRef applied to them
+subjects:
+  - kind: ServiceAccount
+    name: privileged
+    namespace: carlos
+# This is the role that gets applied to the subjects above
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  # This role is a pre-existing role provided by OpenShift and already present in the cluster
+  # You can also create custom roles and apply them to subjects here as well
+  name: 'system:openshift:scc:privileged'
