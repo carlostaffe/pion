@@ -19,5 +19,11 @@ spec:
         ipRanges:
           - cidrIp: 0.0.0.0/0
             description: internet access
+      - ipProtocol: tcp
+        fromPort: 2154
+        toPort: 2158
+        ipRanges:
+          - cidrIp: 0.0.0.0/0
+            description: internet access
   providerConfigRef:
     name: provider-aws

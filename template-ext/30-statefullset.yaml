@@ -27,17 +27,33 @@ spec:
     spec:
       serviceAccountName: privileged
       hostNetwork: true
+#      securityContext:
+#        sysctls:
+#        - name: net.ipv4.ip_local_port_range
+#          value: "10837 10846"
       containers:
         - name: udpsrv
           env:
-            - name: HEALTHCHECK_PORT
-              value: "10000"
-            - name: PORTS
-              value: "10837-10846"
+            - name: INGEST_ADDRESS
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+           # - name: HEALTHCHECK_PORT
+           #   value: "10000"
+           # - name: PORTS
+           #   value: "10837-10846"
           #image: quay.io/greg_caffeine/udprecv:0.1
           #image: quay.io/carlos_taffernaberry/server:1
-          image: quay.io/greg_caffeine/udprecv:0.3
+          #image: quay.io/greg_caffeine/udprecv:0.3
+          image: quay.io/caffeine/ingest_server:testing-1
           ports:
+            - name: shepard
+              containerPort: 2154
+              protocol: TCP
+            - name: kasumi
+              containerPort: 2158
+              protocol: TCP
             - name: pion1
               containerPort: 10837
               protocol: UDP
@@ -71,6 +87,18 @@ spec:
             - name: hcheck
               containerPort: 10000
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 2154
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 2154
+            initialDelaySeconds: 15
+            periodSeconds: 10
       nodeSelector:
         machine.openshift.io/cluster-api-machine-role: car 
         #node.kubernetes.io/instance-type: t3.medium
