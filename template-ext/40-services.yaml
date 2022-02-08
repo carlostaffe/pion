@@ -11,18 +11,25 @@ metadata:
 spec:
   type: NodePort
 #  type: ExternalName
+#  type: HostPort spec.type: Unsupported value: "HostPort": supported values: "ClusterIP", "ExternalName", "LoadBalancer", "NodePort"
   selector:
     statefulset.kubernetes.io/pod-name: udpsrv-0
     app: udpsrv
     #app.kubernetes.io/name: udpsrv
     #app.kubernetes.io/instance: udpsrv-carlos
   ports:
-    - name: pion
+    - name: pion1
       port: 10837
       protocol: UDP
       targetPort: pion1
       appProtocol: udp
       nodePort: 30600
+    - name: pion2
+      port: 10838
+      protocol: UDP
+      targetPort: pion2
+      appProtocol: udp
+      nodePort: 30601
 #    - name: hcheck
 #      port: 10000
 #      protocol: TCP
