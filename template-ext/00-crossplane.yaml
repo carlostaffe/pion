@@ -14,8 +14,8 @@ spec:
     vpcId: vpc-00ff720b4358b24be
     ingress:
       - ipProtocol: udp 
-        fromPort: 30600
-        toPort: 30610
+        fromPort: 10837
+        toPort: 10846
         ipRanges:
           - cidrIp: 0.0.0.0/0
             description: internet access
