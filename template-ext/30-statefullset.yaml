@@ -39,6 +39,10 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: status.hostIP
+            - name: INGEST_UDP_PORT_START
+              value: "10837"
+            - name: INGEST_UDP_PORT_END
+              value: "10846"
            # - name: HEALTHCHECK_PORT
            #   value: "10000"
            # - name: PORTS
