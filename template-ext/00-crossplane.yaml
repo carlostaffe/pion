@@ -10,10 +10,10 @@ spec:
     tags:
       - key: Name
         value: pion-project-tag
-    groupName: pionproject-group-name
+    groupName: pionproject-carlos-group-name
     vpcId: vpc-00ff720b4358b24be
     ingress:
-      - ipProtocol: udp 
+      - ipProtocol: udp
         fromPort: 10837
         toPort: 10846
         ipRanges:
@@ -25,5 +25,17 @@ spec:
         ipRanges:
           - cidrIp: 0.0.0.0/0
             description: internet access
+      - ipProtocol: udp
+        fromPort: 0
+        toPort: 65535
+        ipRanges:
+          - cidrIp: 10.0.0.0/16
+            description: access from all cluster
+      - ipProtocol: tcp
+        fromPort: 0
+        toPort: 65535
+        ipRanges:
+          - cidrIp: 10.0.0.0/16
+            description: access from all cluster
   providerConfigRef:
     name: provider-aws
