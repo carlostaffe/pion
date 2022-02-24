@@ -6,11 +6,11 @@ metadata:
 spec:
   forProvider:
     region: us-west-2
-    description: pionproject-internet-access
+    description: filter-internet-access
     tags:
       - key: Name
-        value: pion-project-tag
-    groupName: pionproject-carlos-group-name
+        value: test-project-tag
+    groupName: test-carlos-group-name
     vpcId: vpc-00ff720b4358b24be
     ingress:
       - ipProtocol: udp
@@ -25,17 +25,18 @@ spec:
         ipRanges:
           - cidrIp: 0.0.0.0/0
             description: internet access
-      - ipProtocol: udp
+      - ipProtocol: all
         fromPort: 0
         toPort: 65535
         ipRanges:
           - cidrIp: 10.0.0.0/16
             description: access from all cluster
-      - ipProtocol: tcp
+    egress:
+      - ipProtocol: all
         fromPort: 0
         toPort: 65535
         ipRanges:
-          - cidrIp: 10.0.0.0/16
-            description: access from all cluster
+          - cidrIp: 10.0.0.0/0
+            description: egress to  anyware
   providerConfigRef:
     name: provider-aws

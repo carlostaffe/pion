@@ -28,20 +28,29 @@ spec:
             id: ami-01105d480bb47353f
           apiVersion: awsproviderconfig.openshift.io/v1beta1
           publicIp: true
+#          blockDevices:
+#          - ebs:
+#              encrypted: true
+#              iops: 4000
+#              kmsKey:
+#                arn: ""
+#              volumeSize: 200
+#              volumeType: io1
           blockDevices:
           - ebs:
               encrypted: true
-              iops: 4000
+#              iops: 4000
               kmsKey:
                 arn: ""
-              volumeSize: 200
-              volumeType: io1
+              volumeSize: 64
+              volumeType: gp2
           credentialsSecret:
             name: aws-cloud-credentials
           deviceIndex: 0
           iamInstanceProfile:
             id: dev-gmlgq-worker-profile
-          instanceType: t3.medium
+          #instanceType: t3.medium
+          instanceType: c6gn.large
           kind: AWSMachineProviderConfig
           metadata:
             creationTimestamp: null
@@ -52,7 +61,7 @@ spec:
           - filters:
             - name: tag:Name
               values:
-              - pion-project-tag
+              - test
           subnet:
             filters:
             - name: tag:Name
